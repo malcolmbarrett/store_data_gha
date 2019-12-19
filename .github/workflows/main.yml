@@ -8,20 +8,14 @@ name: Create data, store it, and push back to master
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@master
+      - uses: actions/checkout@v1
+      - uses: r-lib/actions/setup-r@v1
       - name: Create data
         run: |-
           Rscript -e "source('R/create_data.R')"
-      - name: Commit files
+      - name: Commit results
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
           git commit -m "Add changes" -a
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-    container: rocker/verse:latest
+          git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }}
