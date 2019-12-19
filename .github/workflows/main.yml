@@ -17,6 +17,8 @@ jobs:
           Rscript -e "source('R/create_data.R')"
       - name: Commit results
         run: |
+          git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+          git pull github ${GITHUB_REF} --ff-only
           git config --global user.name 'Malcolm Barrett'
           git config --global user.email 'malcolmbarrett@users.noreply.github.com'
           git commit -am 'Add new data' || echo "No changes to commit"
