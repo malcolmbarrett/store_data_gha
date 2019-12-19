@@ -11,16 +11,17 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2-beta
+        uses: actions/checkout@master
       - name: Create data
         run: |-
           Rscript -e "source('R/create_data.R')"
-      - name: Commit results
+      - name: Commit files
         run: |
-          git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
-          git pull github ${GITHUB_REF} --ff-only
-          git config --global user.name 'Malcolm Barrett'
-          git config --global user.email 'malcolmbarrett@users.noreply.github.com'
-          git commit -am 'Add new data' || echo "No changes to commit"
-          git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Add changes" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
     container: rocker/verse:latest
