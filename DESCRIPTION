@@ -14,3 +14,5 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 Imports: 
     rmarkdown
+URL: https://github.com/malcolmbarrett/store_data_gha
+BugReports: https://github.com/malcolmbarrett/store_data_gha/issues
