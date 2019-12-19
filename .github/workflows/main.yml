@@ -4,7 +4,7 @@ name: Render and Deploy socalr.org
     branches:
       - master
   schedule:
-    - cron:  '*/2 * * * *'
+    - cron:  '*/5 * * * *'
 
 jobs:
   build:
