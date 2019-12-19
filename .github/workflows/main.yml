@@ -14,8 +14,7 @@ jobs:
         uses: actions/checkout@master
       - name: Install Package Dependencies
         run: |-
-          Rscript -e "install.packages('remotes', repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
-          Rscript -e "remotes::install_deps(dependencies = TRUE, repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
+          Rscript -e "install.packages('rmarkdown', repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
       - name: Create data
         run: |-
           Rscript -e "rmarkdown::render('create_data.Rmd')"
