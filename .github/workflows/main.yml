@@ -1,4 +1,4 @@
-name: Render and Deploy socalr.org
+name: Create data, store it, and push back to master
 'on':
   push:
     branches:
